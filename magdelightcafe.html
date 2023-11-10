@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact and Services Form - MAG DELIGHT CAFE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label, select, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            font-style: italic;
+            color: #555;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 5px 0;
+        }
+        header p {
+            margin: 0;
+        }
+    </style>
+    <script>
+        function calculateTotalCost() {
+            const copies = parseInt(document.getElementById('copies').value);
+            const service = document.getElementById('service').value;
+            const unitCost = getUnitCost(service);
+            const totalCost = copies * unitCost;
+            document.getElementById('unit-cost').innerText = `Unit Cost: $${unitCost.toFixed(2)}`;
+            document.getElementById('total-cost').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
+        }
+
+        function getUnitCost(service) {
+            switch (service) {
+                case 'typesetting':
+                    return 150;
+                case 'photocopy':
+                    return 20;
+                case 'printing-bw':
+                    return 50;
+                case 'printing-color':
+                    return 150;
+                case 'invitation-card':
+                    return 1500;
+                case 'identification-card':
+                    // Negotiable, you might need to handle this case separately
+                    return 0;
+                case 'lamination':
+                    return 150;
+                case 'spiral-binding':
+                    return 150;
+                case 'flex-banner':
+                    return 200;
+                case 'certificate-design':
+                    // Negotiable, you might need to handle this case separately
+                    return 0;
+                default:
+                    // Others or unknown service
+                    return 0;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>MAG DELIGHT CAFE</h1>
+        <p>Shop 'A' Bedorah Shopping Complex, Beside Ecobank, Nasarawa, Nasarawa State</p>
+    </header>
+    <h2>Contact and Services Form</h2>
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="service">Select a Service:</label>
+        <select id="service" name="service" onchange="calculateTotalCost()" required>
+            <option value="typesetting">Typesetting</option>
+            <option value="photocopy">Photocopy</option>
+            <option value="printing-bw">Printing (B/W)</option>
+            <option value="printing-color">Printing (Colour)</option>
+            <option value="invitation-card">Invitation Card</option>
+            <option value="identification-card">Identification Card</option>
+            <option value="lamination">Lamination</option>
+            <option value="spiral-binding">Spiral Binding</option>
+            <option value="flex-banner">Flex (Banner)</option>
+            <option value="certificate-design">Certificate Design</option>
+            <option value="others">Others</option>
+        </select>
+
+        <label for="copies">Number of Copies (1-1000):</label>
+        <input type="number" id="copies" name="copies" min="1" max="1000" onchange="calculateTotalCost()" required>
+
+        <div id="unit-cost"></div>
+        <div id="total-cost"></div>
+
+        <input type="submit" value="Submit">
+    </form>
+    <footer>Thank you for your patronage, looking forward to doing more business with you.</footer>
+</body>
+</html>
